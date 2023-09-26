@@ -1,40 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Banner from '../Header/Banner/Banner';
 
-const DonateCard = ({ card }) => {
+const DonateCard = ({ card,setSearch }) => {
 
   const { id, picture, category, category_bg, card_bg, text_color, button_bg, title } = card || {}
+
+
+  const buttonStyle = {
+    // color: ,
+    background: button_bg,
+  };
   return (
     <div>
       <Link to={`/cards/${id}`}>
-      <div className="relative flex  flex-col rounded-xl  bg-clip-border text-gray-700 shadow-md" style={{ backgroundColor: card_bg }}>
 
-        <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
-          <img
-            src={picture}
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="p-6">
-          <div className="mb-2 flex flex-col justify-between ">
-          
-           <p className="block font-sans text-base font-medium  text-blue-gray-900 antialiased " style={{ color: category_bg }} >
-              {category}
-            </p>
-          
-           
-           
-            <p className="block font-sans text-base font-medium leading-relaxed text-blue-gray-900 antialiased " style={{ color: category_bg }}>
-              {title}
-              {/* style={{color:category_bg}} */}
-            </p>
+        <div className="card h-96 bg-base-100 shadow-xl"style={{ backgroundColor: card_bg }}>
+          <figure><img className=' w-full h-80' src={picture} alt="Shoes" /></figure>
+          <div className="card-body">
+
+          <div className="card-actions">
+              <button className=" w-20 h-8 rounded-xl text-white "style={buttonStyle}>{category}</button>
           </div>
+            <h2 className="card-title" style={{ color: category_bg }}>{title}</h2>
 
+          </div>
         </div>
 
-      </div>
-      </Link>
-    </div>
+      </Link >
+    </div >
   );
 };
 

@@ -2,6 +2,11 @@ import React from 'react';
 
 const DonetionDetails = ({ card }) => {
   const { id, picture, category, category_bg, card_bg, text_color, button_bg, title, description, price } = card || {}
+
+  const buttonStyle = {
+    // color: ,
+    background: button_bg,
+  };
   return (
     // <div>
     //   <div className='felx justify-start'>
@@ -28,11 +33,13 @@ const DonetionDetails = ({ card }) => {
     <div className="card card-side bg-base-100 shadow-xl">
       <figure><img src={picture} alt="Movie" /></figure>
       <div className="card-body">
-      <p className="card-title">{category}</p>
+      <div className="card-actions">
+              <button className=" w-20 h-8 rounded-xl text-white "style={buttonStyle}>{category}</button>
+          </div>
         <h2 className="card-title">{title}</h2>
-        <p>{price}</p>
+        <p style={{ color: category_bg }}>{price}</p>
         <div className="card-actions justify-">
-          <button className="btn btn-primary">View Details</button>
+          <button className="btn btn-primary" style={buttonStyle}>View Details</button>
         </div>
       </div>
     </div>

@@ -35,8 +35,11 @@ const Donation = () => {
           }
         </div>
       </div>}
-      <button onClick={()=>setisshow(!isshow)} className='p-5 bg-green-400 block mx-auto rounded-lg my-3'>{isshow ? "Show less" :"see more"}
-      </button>
+      {donations.length>4 &&    <button onClick={()=>setisshow(!isshow)} className='p-5 bg-green-400 block mx-auto rounded-lg my-3'>{isshow ? "Show less" :"see more"}
+  
+      </button>}
+
+     
     </div>
   );
 };

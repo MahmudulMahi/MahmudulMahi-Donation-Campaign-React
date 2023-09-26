@@ -1,12 +1,33 @@
 import React from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const DonationCard = ({ card }) => {
 
   const { id, picture, category, category_bg, card_bg, text_color, button_bg, title,description,price } = card || {}
 
   const handleAdd=()=>{
-    console.log(card)
-    localStorage
+    const addDonation=[]
+
+    const donationItem=JSON.parse(localStorage.getItem('donations'))
+
+    if(!donationItem){
+      addDonation.push(card)
+      localStorage.setItem('donations',JSON.stringify(addDonation))
+      toast('you have applied successfully')
+    }
+    else{
+
+      const isExits=donationItem.find(card =>card.id ===id)
+      if(!isExits){
+        addDonation.push(...donationItem,card)
+        localStorage.setItem('donations',JSON.stringify(addDonation))
+        toast('you have applied successfully')
+      }
+      else{
+        toast('already add')
+      }
+    
+    }
   }
   const buttonStyle = {
     // color: ,
@@ -32,6 +53,7 @@ const DonationCard = ({ card }) => {
         
         </div >
       </div>
+      <ToastContainer />
     </div>
   );
 };

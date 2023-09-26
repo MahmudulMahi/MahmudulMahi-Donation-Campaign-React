@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const DonateCard = ({ card }) => {
 
   const { id, picture, category, category_bg, card_bg, text_color, button_bg, title } = card || {}
   return (
     <div>
+      <Link to={`/cards/${id}`}>
       <div className="relative flex  flex-col rounded-xl  bg-clip-border text-gray-700 shadow-md" style={{ backgroundColor: card_bg }}>
 
         <div className="relative mx-4 mt-4 h-96 overflow-hidden rounded-xl bg-white bg-clip-border text-gray-700">
@@ -31,6 +33,7 @@ const DonateCard = ({ card }) => {
         </div>
 
       </div>
+      </Link>
     </div>
   );
 };

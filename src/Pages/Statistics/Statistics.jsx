@@ -1,35 +1,52 @@
-import React from 'react';
-import CanvasJSReact from '@canvasjs/react-charts';
+import React, { useState, useEffect } from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']; // Define colors for segments
 
 const Statistics = () => {
-  const options = {
-    exportEnabled: true,
-    animationEnabled: true,
-    title: {
-      text: "Website Traffic Sources"
-    },
-    data: [{
-      type: "pie",
-      startAngle: 75,
-      toolTipContent: "<b>{label}</b>: {y}%",
-      showInLegend: "true",
-      legendText: "{label}",
-      indexLabelFontSize: 16,
-      indexLabel: "{label} - {y}%",
-      dataPoints: [
-        { y: 18, label: "Direct" },
-        { y: 49, label: "Organic Search" },
-        { y: 9, label: "Paid Search" },
-        { y: 5, label: "Referral" },
-        { y: 19, label: "Social" }
-      ]
-    }]
-  }
+  const [card, setCard] = useState([]);
+  const [localCard, setLocalCard] = useState([]);
+
+  useEffect(() => {
+    fetch('cards.json')
+      .then((res) => res.json())
+      .then((data) => setCard(data));
+  }, []);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('donations');
+    const parsedData = JSON.parse(storedData);
+    setLocalCard(parsedData || []); // Set to an empty array if data is not available
+  }, []);
+
+  // Combine card and localCard data into a single dataset
+  const mergedData = [
+    { name: 'API Data', value: card.length },
+    { name: 'Local Storage Data', value: localCard.length },
+  ];
+
   return (
-    <div className=''>
-      <CanvasJSChart options={options} />
+    <div>
+      <h1>Data from API: {card.length}</h1>
+      <h1>Data from Local Storage: {localCard.length}</h1>
+      <ResponsiveContainer width="100%" height={600}>
+        <PieChart>
+          <Pie
+            data={mergedData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={({ name, value, percent }) => `${name}: ${(percent * 100).toFixed(2)}%`}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {mergedData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
 };

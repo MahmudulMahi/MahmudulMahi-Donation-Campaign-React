@@ -31,7 +31,7 @@ const DonetionDetails = ({ card }) => {
     //   </div>
     // </div>
     <div className="card card-side bg-base-100 shadow-xl">
-      <figure><img src={picture} alt="Movie" /></figure>
+      <figure><img className='w-72 h-44' src={picture} alt="Movie" /></figure>
       <div className="card-body">
       <div className="card-actions">
               <button className=" w-20 h-8 rounded-xl text-white "style={buttonStyle}>{category}</button>

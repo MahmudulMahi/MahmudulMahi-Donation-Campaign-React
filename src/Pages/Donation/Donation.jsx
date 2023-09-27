@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DonationData from '../DonationData/DonationData';
 import DonetionDetails from '../DonetionDetails/DonetionDetails';
 
-const Donation = () => {
+const Donation = ({donationItem}) => {
 
   const [donations,setdonations]=useState([])
 
@@ -26,7 +26,7 @@ const Donation = () => {
       {noFound ? <p className='flex items-center justify-center'>{noFound}</p> : 
 
       <div>
-        <div className='grid grid-cols-2 gap-3'>
+        <div className='grid md:grid-cols-1 lg:grid-cols-2 gap-3'>
           {
             isshow ? donations.map(card=> <DonetionDetails key={card.id} card={card}></DonetionDetails>):
 

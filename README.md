@@ -5,4 +5,4 @@
 
 •when click any card show card and when click the button data is saved localstorage.
 
-•
+•when click  statistics page open pai chart.

@@ -1,5 +1,5 @@
 
-• Add at least 3 Project features
+•
 
 •At first data load from json data.this data will show Home page.There are three route here.every route working.
 
